@@ -149,3 +149,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 >>>>>>> 4b923a6d52575f81033b61c04c01209f9ba40353
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
