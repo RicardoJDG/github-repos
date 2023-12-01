@@ -10,3 +10,15 @@ body {
   margin: 0;
   height: 100%;
 }
+
+.layout-container {
+  @apply grid grid-cols-3 grid-rows-4;
+}
+
+.home-title {
+  @apply text-5xl text-center row-start-2 col-start-2 flex items-center justify-center;
+}
+
+.search-input {
+  @apply row-start-3 col-start-2;
+}
