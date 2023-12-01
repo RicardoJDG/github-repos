@@ -22,3 +22,11 @@ body {
 .search-input {
   @apply row-start-3 col-start-2;
 }
+
+.profile-column {
+  @apply col-span-1 row-span-3 justify-items-center m-4;
+}
+
+.repos-column {
+  @apply col-span-2 m-4;
+}

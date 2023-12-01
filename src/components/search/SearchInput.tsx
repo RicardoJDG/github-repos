@@ -1,21 +1,17 @@
 import { Input } from "@nextui-org/react"
 import { useSearchValue } from "./hooks"
-import React, { FormEvent } from "react"
+import { FormEvent } from "react"
 import { getUser } from "../../services/search"
+import { useFetchedUser } from "../../context/fetchedUserHook"
 
-interface SearchInputProps {
-  onUserSearch: React.Dispatch<React.SetStateAction<undefined>>
-}
-
-const SearchInput: React.FC<SearchInputProps> = ({
-  onUserSearch: setUserData
-}) => {
+const SearchInput = () => {
   const { searchValue, handleSearchChange } = useSearchValue()
+  const { setFetchedUserData } = useFetchedUser()
 
   const handleSearchUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const userData = await getUser(searchValue)
-    setUserData(userData)
+    setFetchedUserData(userData)
   }
 
   return (

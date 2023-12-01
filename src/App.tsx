@@ -1,14 +1,14 @@
-import { useState } from "react"
-import SearchInput from "./components/search/SearchInput"
+import Home from "./components/home-screen/Home"
+import GithubProfile from "./components/profile/GithubProfile"
+import { useFetchedUser } from "./context/fetchedUserHook"
 
 function App() {
-  const [userData, setUserData] = useState()
+  const { fetchedUserData } = useFetchedUser()
+  console.log("🚀 ~ file: App.tsx:7 ~ App ~ fetchedUserData:", fetchedUserData)
 
-  console.log(userData)
   return (
     <div className="w-full h-full layout-container">
-      <div className="home-title">Github Repositories</div>
-      <SearchInput onUserSearch={setUserData} />
+      {!fetchedUserData ? <Home /> : <GithubProfile />}
     </div>
   )
 }

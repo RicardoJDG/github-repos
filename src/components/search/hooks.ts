@@ -1,5 +1,4 @@
 import { ChangeEvent, useState } from "react"
-import { getUser } from "../../services/search"
 
 export const useSearchValue = () => {
   const [searchValue, setSearchValue] = useState('')
