@@ -12,7 +12,8 @@ body {
 }
 
 .layout-container {
-  @apply grid grid-cols-3 grid-rows-4;
+  @apply flex flex-col justify-center gap-6;
+  @apply md:grid md:grid-cols-3 md:grid-rows-4;
 }
 
 .home-title {
@@ -20,13 +21,18 @@ body {
 }
 
 .search-input {
-  @apply row-start-3 col-start-2;
+  @apply row-start-3 col-start-2 p-2;
 }
 
 .profile-column {
-  @apply col-span-1 row-span-3 justify-items-center m-4;
+  @apply col-span-1 row-span-full justify-items-center m-4;
 }
 
 .repos-column {
-  @apply col-span-2 m-4;
+  @apply sm:col-span-2 flex flex-col h-full m-6 gap-4 sm:gap-8;
+  /* @apply sm:grid sm:col-span-2 sm:row-span-full sm:m-4 sm:grid-cols-2 sm:gap-4 sm:grid-rows-repos; */
+}
+
+.repos-cards-container {
+  @apply sm:grid sm:grid-cols-2 sm:gap-4 h-full;
 }

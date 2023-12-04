@@ -9,7 +9,11 @@ export default {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {}
+    extend: {
+      gridTemplateRows: {
+        'repos': '60px 60px repeat(3, 1fr)'
+      }
+    }
   },
   darkMode: "class",
   plugins: [nextui()]

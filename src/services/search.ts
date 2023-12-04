@@ -26,7 +26,19 @@ export const getUser = async (username: UserQuery): Promise<FetchedUser | string
     const response = await fetch(`${API_URL}${userQuery}`)
     const userData = await response.json()
     if (response.status === 200 && userData) {
-      return userData
+      const repoFetch = await fetch(userData.repos_url)
+      const repoData = await repoFetch.json()
+
+      const orgsFetch = await fetch(userData.organizations_url)
+      const orgsData = await orgsFetch.json()
+
+      const fetchedUserData: FetchedUser = {
+        ...userData,
+        repositories: repoData,
+        organizations: orgsData
+      }
+
+      return fetchedUserData
     }
     return `${username} is not a valid user`
   } catch (error) {
