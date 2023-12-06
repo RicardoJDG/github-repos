@@ -4,15 +4,6 @@ import ForkIcon from "../../icons/ForkIcon"
 import SearchInput from "../search/SearchInput"
 import { useFetchedUser } from "../../context/fetchedUserHook"
 
-const mock_content = {
-  name: "absurd-sql",
-  html_url: "https://github.com/jlongster/absurd-sql",
-  description: "sqlite3 in ur indexeddb (hopefully a better backend soon) ",
-  language: "Javascript",
-  forks_count: 93,
-  stargazers_count: 3900
-}
-
 const RepositoriesList = () => {
   const { fetchedUserData } = useFetchedUser()
   if (typeof fetchedUserData === "string" || !fetchedUserData) {
@@ -20,7 +11,7 @@ const RepositoriesList = () => {
   }
   return (
     <div className="repos-column">
-      <div className="sm:col-span-full self-center">
+      <div className="sm:col-span-full">
         <SearchInput isInHeader={true} />
       </div>
       <h2 className="text-2xl sm:text-4xl lg:text-5xl col-span-full">

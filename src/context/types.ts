@@ -17,6 +17,7 @@ interface OrganizationType {
   login: string,
 }
 export interface FetchedUser {
+  id: number
   avatar_url: string
   bio: string
   followers: number
@@ -26,6 +27,11 @@ export interface FetchedUser {
   name?: string
   repositories: Array<RepositoryType>
   organizations: Array<OrganizationType>
+}
+
+export interface SuggestionsResponse {
+
+  items: Array<FetchedUser>
 }
 
 export interface FetchedUserContextType {

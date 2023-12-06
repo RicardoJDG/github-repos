@@ -30,12 +30,12 @@ const ProfileInfo = () => {
             <Divider orientation="vertical" />
             <p>{fetchedUserData.following} Following</p>
           </div>
-          <div className="flex my-4">
-            <EmailIcon className="w-6 h-6" />
-            <h4 className="ml-2">
-              {fetchedUserData?.email ?? "ricardojdg13@gmail.com"}
-            </h4>
-          </div>
+          {fetchedUserData.email && (
+            <div className="flex my-4">
+              <EmailIcon className="w-6 h-6" />
+              <h4 className="ml-2">{fetchedUserData.email}</h4>
+            </div>
+          )}
           {fetchedUserData.organizations.length > 0 && (
             <>
               <Divider />

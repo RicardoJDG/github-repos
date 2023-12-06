@@ -1,11 +1,22 @@
-import { ChangeEvent, useState } from "react"
+import { useEffect, useState } from "react"
+import { getSuggestions } from "../../services/search"
+import { FetchedUser } from "../../context/types"
 
 export const useSearchValue = () => {
   const [searchValue, setSearchValue] = useState('')
+  const [suggestions, setSuggestions] = useState<Array<FetchedUser>>([])
 
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.currentTarget.value)
+  const handleSearchChange = (value: string) => {
+    setSearchValue(value)
   }
 
-  return { searchValue, handleSearchChange }
+  useEffect(() => {
+    if (searchValue.length > 0) {
+      getSuggestions(searchValue).then((suggestions) => suggestions && setSuggestions(suggestions.items))
+    }
+  }, [searchValue])
+
+  const resetInput = () => setSearchValue('')
+
+  return { searchValue, handleSearchChange, resetInput, suggestions }
 }
