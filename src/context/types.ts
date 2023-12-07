@@ -30,8 +30,9 @@ export interface FetchedUser {
 }
 
 export interface SuggestionsResponse {
-
-  items: Array<FetchedUser>
+  total_count: number,
+  incomplete_results: boolean
+  items: Array<Partial<FetchedUser>>
 }
 
 export interface FetchedUserContextType {

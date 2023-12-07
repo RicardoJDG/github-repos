@@ -53,9 +53,12 @@ const SearchInput: React.FC<SearchInputProps> = ({ isInHeader = false }) => {
           inputValue={searchValue}
           onInputChange={handleSearchChange}
           items={suggestions}
+          data-test-id="search-bar"
         >
           {(item) => (
-            <AutocompleteItem key={item.id}>{item.login}</AutocompleteItem>
+            <AutocompleteItem data-test-id={item.login} key={item.id}>
+              {item.login}
+            </AutocompleteItem>
           )}
         </Autocomplete>
         <Button

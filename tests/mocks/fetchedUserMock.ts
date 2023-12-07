@@ -1,4 +1,4 @@
-import { FetchedUser } from "../context/types";
+import { FetchedUser } from "../../src/context/types";
 
 export const MOCKED_USER: FetchedUser = {
   id: 1,
