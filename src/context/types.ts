@@ -32,7 +32,7 @@ export interface FetchedUser {
 export interface SuggestionsResponse {
   total_count: number,
   incomplete_results: boolean
-  items: Array<Partial<FetchedUser>>
+  items: Array<FetchedUser>
 }
 
 export interface FetchedUserContextType {

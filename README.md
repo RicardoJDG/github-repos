@@ -53,5 +53,6 @@ Oh God there's a ton to improve here.
 4. I would probably use something like Zod to validate API responses
 5. Would rewrite the app to work with React Query, which after testing it a bit I found I really liked.
 6. I would end up using the GraphQL API to get more familiar with it.
+7. There's a lot of room to improve error handling and loading states
 
 I will keep iterating over this to practice new stuff as I mentioned before, but as of right now I kind of have to deliver this even if isn't as complete as I would've liked it to be.
