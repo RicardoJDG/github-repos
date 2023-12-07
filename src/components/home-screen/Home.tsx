@@ -1,3 +1,4 @@
+import ErrorBoundary from "../../error/errorBoundary"
 import SearchInput from "../search/SearchInput"
 
 const Home = () => {
@@ -5,7 +6,9 @@ const Home = () => {
     <div className="layout-container w-full h-full">
       <>
         <div className="home-title">Github Repositories</div>
-        <SearchInput />
+        <ErrorBoundary>
+          <SearchInput />
+        </ErrorBoundary>
       </>
     </div>
   )

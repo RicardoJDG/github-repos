@@ -1,4 +1,4 @@
-import { FetchedUser, SuggestionsResponse } from "../context/types";
+import { FetchedUser, FullOrganizationType, OrganizationType, RepositoryType, SuggestionsResponse } from "../context/types";
 import { API_URL, SUGGESTIONS_ENDPOINT, USER_ENDPOINT } from "./apiConstants";
 
 
@@ -8,7 +8,7 @@ import { API_URL, SUGGESTIONS_ENDPOINT, USER_ENDPOINT } from "./apiConstants";
  * @returns {Promise<SuggestionsResponse>}
  * */
 export const getSuggestions = async (searchValue: string): Promise<SuggestionsResponse | undefined> => {
-  const searchQuery = `${SUGGESTIONS_ENDPOINT}?q=${searchValue}`
+  const searchQuery = `${SUGGESTIONS_ENDPOINT}?q=${searchValue}&per_page=10`
 
   try {
     const response = await fetch(`${API_URL}${searchQuery}`, {
@@ -19,7 +19,7 @@ export const getSuggestions = async (searchValue: string): Promise<SuggestionsRe
     const suggestions: SuggestionsResponse = await response.json()
     return suggestions
   } catch (error) {
-    console.error(`Houston we have this problem: ${error}`)
+    console.info(`Houston we have this problem: ${error}`)
   }
   return
 }
@@ -27,37 +27,42 @@ export const getSuggestions = async (searchValue: string): Promise<SuggestionsRe
 /** 
  * Function to fetch specifically user suggestions
  * @param {string} username pass the user's input from the search bar
- * @returns {Promise<FetchedUser | string | undefined>}
+ * @returns {Promise<FetchedUser | undefined>}
  * */
-export const getUser = async (username: string): Promise<FetchedUser | string | undefined> => {
-  const userQuery = `${USER_ENDPOINT}/${username}&per_page=10`
+export const getUser = async (username: string): Promise<FetchedUser | undefined> => {
+  const userQuery = `${USER_ENDPOINT}/${username}`
 
   try {
-    const response = await fetch(`${API_URL}${userQuery}`, {
-      headers: {
-        'authorization': `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`
-      }
-    })
-    const userData = await response.json()
-    if (response.status === 200 && userData) {
-      const repoFetch = await fetch(userData.repos_url)
-      const repoData = await repoFetch.json()
+    const userData = await fetcher(`${API_URL}${userQuery}`)
+    const repoData: RepositoryType = await fetcher(userData.repos_url)
+    const orgsData: OrganizationType[] = await fetcher(userData.organizations_url)
 
-      const orgsFetch = await fetch(userData.organizations_url)
-      const orgsData = await orgsFetch.json()
+    const orgsPromises: FullOrganizationType[] = await Promise.all(orgsData.map((org) => fetcher(org.url)))
+    // @ts-expect-error the error is because the .find might return undefined, but we know that can't be the case
+    const completeOrgsData: FullOrganizationType[] = orgsPromises.map((org) => { return { ...orgsData.find((incompleteOrg) => incompleteOrg.id === org.id), name: org.name } })
 
-      const fetchedUserData: FetchedUser = {
-        ...userData,
-        repositories: repoData,
-        organizations: orgsData
-      }
-
-      return fetchedUserData
+    const fetchedUserData: FetchedUser = {
+      ...userData,
+      repositories: repoData,
+      organizations: completeOrgsData
     }
-    return `${username} is not a valid user`
+
+    return fetchedUserData
   } catch (error) {
     console.error(`Houston we have this problem: ${error}`)
   }
 }
 
-// Maybe add getUtilities?
+const fetcher = async (endpointUrl: string) => {
+  try {
+    const response = await fetch(endpointUrl, {
+      headers: {
+        'authorization': `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`
+      }
+    })
+    const responseData = await response.json()
+    return responseData
+  } catch (error) {
+    console.error(`Houston we have this problem: ${error}`)
+  }
+}

@@ -5,7 +5,7 @@ import { useFetchedUser } from "../../context/fetchedUserHook"
 
 const ProfileInfo = () => {
   const { fetchedUserData } = useFetchedUser()
-  if (typeof fetchedUserData === "string" || !fetchedUserData) {
+  if (!fetchedUserData) {
     return
   }
   return (
@@ -36,36 +36,39 @@ const ProfileInfo = () => {
               <h4 className="ml-2">{fetchedUserData.email}</h4>
             </div>
           )}
-          {fetchedUserData.organizations.length > 0 && (
-            <>
-              <Divider />
-              <div className="my-4">
-                <h2 className="mb-2">Organizations</h2>
-                <div className="flex">
-                  <Card
-                    className="border-none dark:bg-default-100/50 w-full"
-                    shadow="sm"
-                    isBlurred
-                  >
-                    <CardBody>
-                      <div className="flex items-center">
-                        <Image
-                          alt={fetchedUserData.organizations[0].login}
-                          src={fetchedUserData.organizations[0].avatar_url}
-                          className="h-16 w-16"
-                        />
-                        <div className="flex flex-col mx-8 ">
-                          <h2>Nombre de verdad</h2>
-                          <h4>{fetchedUserData.organizations[0].login}</h4>
-                          <p>Prettier is an opinionated code formatter</p>
-                        </div>
-                      </div>
-                    </CardBody>
-                  </Card>
-                </div>
-              </div>
-            </>
-          )}
+          <h2 className="mb-2">Organizations</h2>
+          <Divider />
+          <div className="overflow-auto">
+            {fetchedUserData.organizations.length > 0 &&
+              fetchedUserData.organizations.map((org) => (
+                <>
+                  <div className="my-4">
+                    <div className="flex">
+                      <Card
+                        className="border-none dark:bg-default-100/50 w-full"
+                        shadow="sm"
+                        isBlurred
+                      >
+                        <CardBody>
+                          <div className="flex items-center">
+                            <Image
+                              alt={org.login}
+                              src={org.avatar_url}
+                              className="h-16 w-16"
+                            />
+                            <div className="flex flex-col mx-8 ">
+                              <h2>{org.name}</h2>
+                              <h4>{org.login}</h4>
+                              <p>{org.description}</p>
+                            </div>
+                          </div>
+                        </CardBody>
+                      </Card>
+                    </div>
+                  </div>
+                </>
+              ))}
+          </div>
         </CardBody>
       </Card>
     </div>

@@ -12,7 +12,7 @@ export const FetchedUserContext = createContext<FetchedUserContextType | null>(
 export default function FetchedUserContextProvider({
   children
 }: FetchedUserContextProviderProps) {
-  const [fetchedUserData, setFetchedUserData] = useState<FetchedUser | string>()
+  const [fetchedUserData, setFetchedUserData] = useState<FetchedUser>()
 
   return (
     <FetchedUserContext.Provider

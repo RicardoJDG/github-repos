@@ -2,7 +2,7 @@ export type FetchedUserContextProviderProps = {
   children: React.ReactNode
 }
 
-interface RepositoryType {
+export interface RepositoryType {
   name: string,
   html_url: string,
   description: string,
@@ -11,11 +11,18 @@ interface RepositoryType {
   stargazers_count: number
 }
 
-interface OrganizationType {
+export interface OrganizationType {
+  id: number
+  url: string
   avatar_url: string,
   description: string,
   login: string,
 }
+
+export interface FullOrganizationType extends OrganizationType {
+  name: string
+}
+
 export interface FetchedUser {
   id: number
   avatar_url: string
@@ -26,7 +33,7 @@ export interface FetchedUser {
   email?: string
   name?: string
   repositories: Array<RepositoryType>
-  organizations: Array<OrganizationType>
+  organizations: Array<FullOrganizationType>
 }
 
 export interface SuggestionsResponse {
@@ -36,8 +43,8 @@ export interface SuggestionsResponse {
 }
 
 export interface FetchedUserContextType {
-  fetchedUserData: FetchedUser | undefined | string
+  fetchedUserData: FetchedUser | undefined
   setFetchedUserData: React.Dispatch<
-    React.SetStateAction<FetchedUser | undefined | string>
+    React.SetStateAction<FetchedUser | undefined>
   >
 }

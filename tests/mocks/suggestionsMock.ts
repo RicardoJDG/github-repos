@@ -1,6 +1,10 @@
-import { SuggestionsResponse } from "../../src/context/types";
+import { FetchedUser, SuggestionsResponse } from "../../src/context/types";
 
-export const MOCKED_SUGGESTIONS: SuggestionsResponse = {
+type MockedSuggestions = Omit<SuggestionsResponse, 'items'> & {
+  items: Array<Pick<FetchedUser, 'id' | 'login'>>
+}
+
+export const MOCKED_SUGGESTIONS: MockedSuggestions = {
   "total_count": 39971,
   "incomplete_results": false,
   "items": [

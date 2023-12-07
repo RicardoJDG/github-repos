@@ -23,7 +23,7 @@ interface ModalProps {
 const ModalProfile: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   const { fetchedUserData } = useFetchedUser()
 
-  if (typeof fetchedUserData === "string" || !fetchedUserData) {
+  if (!fetchedUserData) {
     return
   }
 

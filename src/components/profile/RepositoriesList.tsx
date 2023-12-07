@@ -3,16 +3,20 @@ import StarIcon from "../../icons/StarIcon"
 import ForkIcon from "../../icons/ForkIcon"
 import SearchInput from "../search/SearchInput"
 import { useFetchedUser } from "../../context/fetchedUserHook"
+import ErrorBoundary from "../../error/errorBoundary"
 
 const RepositoriesList = () => {
   const { fetchedUserData } = useFetchedUser()
-  if (typeof fetchedUserData === "string" || !fetchedUserData) {
+  if (!fetchedUserData) {
     return
   }
+
   return (
     <div className="repos-column">
       <div className="sm:col-span-full">
-        <SearchInput isInHeader={true} />
+        <ErrorBoundary>
+          <SearchInput isInHeader={true} />
+        </ErrorBoundary>
       </div>
       <h2 className="text-2xl sm:text-4xl lg:text-5xl col-span-full">
         {`${fetchedUserData?.name ?? fetchedUserData.login}'s repositories`}

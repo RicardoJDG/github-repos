@@ -36,3 +36,7 @@ body {
 .repos-cards-container {
   @apply flex flex-col gap-4 sm:grid sm:grid-cols-2 sm:gap-4 overflow-auto;
 }
+
+.loading-spinner {
+  @apply row-start-4 col-start-2 text-center;
+}
