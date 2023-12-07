@@ -43,6 +43,8 @@ Want to run tests? then:
 
 Also you can check out the project live in the following link:
 
+https://main--courageous-mandazi-86a999.netlify.app/
+
 ## Future improvements
 
 Oh God there's a ton to improve here.

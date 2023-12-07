@@ -11,11 +11,7 @@ export const getSuggestions = async (searchValue: string): Promise<SuggestionsRe
   const searchQuery = `${SUGGESTIONS_ENDPOINT}?q=${searchValue}&per_page=10`
 
   try {
-    const response = await fetch(`${API_URL}${searchQuery}`, {
-      headers: {
-        'authorization': `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`
-      }
-    })
+    const response = await fetch(`${API_URL}${searchQuery}`)
     const suggestions: SuggestionsResponse = await response.json()
     return suggestions
   } catch (error) {
@@ -55,11 +51,7 @@ export const getUser = async (username: string): Promise<FetchedUser | undefined
 
 const fetcher = async (endpointUrl: string) => {
   try {
-    const response = await fetch(endpointUrl, {
-      headers: {
-        'authorization': `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`
-      }
-    })
+    const response = await fetch(endpointUrl)
     const responseData = await response.json()
     return responseData
   } catch (error) {
