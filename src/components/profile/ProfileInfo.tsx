@@ -36,39 +36,42 @@ const ProfileInfo = () => {
               <h4 className="ml-2">{fetchedUserData.email}</h4>
             </div>
           )}
-          <h2 className="mb-2">Organizations</h2>
-          <Divider />
-          <div className="overflow-auto">
-            {fetchedUserData.organizations.length > 0 &&
-              fetchedUserData.organizations.map((org) => (
-                <>
-                  <div className="my-4">
-                    <div className="flex">
-                      <Card
-                        className="border-none dark:bg-default-100/50 w-full"
-                        shadow="sm"
-                        isBlurred
-                      >
-                        <CardBody>
-                          <div className="flex items-center">
-                            <Image
-                              alt={org.login}
-                              src={org.avatar_url}
-                              className="h-16 w-16"
-                            />
-                            <div className="flex flex-col mx-8 ">
-                              <h2>{org.name}</h2>
-                              <h4>{org.login}</h4>
-                              <p>{org.description}</p>
+          {fetchedUserData.organizations.length > 0 && (
+            <>
+              <h2 className="mb-2">Organizations</h2>
+              <Divider />
+              <div className="overflow-auto">
+                {fetchedUserData.organizations.map((org) => (
+                  <>
+                    <div className="my-4">
+                      <div className="flex">
+                        <Card
+                          className="border-none dark:bg-default-100/50 w-full"
+                          shadow="sm"
+                          isBlurred
+                        >
+                          <CardBody>
+                            <div className="flex items-center">
+                              <Image
+                                alt={org.login}
+                                src={org.avatar_url}
+                                className="h-16 w-16"
+                              />
+                              <div className="flex flex-col mx-8 ">
+                                <h2>{org.name}</h2>
+                                <h4>{org.login}</h4>
+                                <p>{org.description}</p>
+                              </div>
                             </div>
-                          </div>
-                        </CardBody>
-                      </Card>
+                          </CardBody>
+                        </Card>
+                      </div>
                     </div>
-                  </div>
-                </>
-              ))}
-          </div>
+                  </>
+                ))}
+              </div>
+            </>
+          )}
         </CardBody>
       </Card>
     </div>

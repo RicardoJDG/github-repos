@@ -67,6 +67,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
           data-test-id="search-bar"
           errorMessage={errorMsg}
           isInvalid={caughtError && searchValue.length === 0}
+          size="sm"
         >
           {(item) => (
             <AutocompleteItem data-test-id={item.login} key={item.id}>
@@ -76,8 +77,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         </Autocomplete>
         <Button
           type="submit"
-          className="w-1/6 mx-4"
-          size="lg"
+          className="sm:w-1/6 sm:mx-4 sm:text-base text-xs"
           color="primary"
           disabled={searchValue.length === 0}
         >
