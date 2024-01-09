@@ -5,7 +5,7 @@
 **If you just want to see how to run the app, jump to the end of the README**
 
 This is supposed to be a simple React app where you can search for a specific Github's user and see their repositories. It is NOT finished yet, but what started as a simple
-Tech interview app has become something interesting for me to try new things.
+Tech interview app has become something interesting for me to try new things
 
 Technologies used in the project:
 
