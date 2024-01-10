@@ -5,8 +5,6 @@ import {
   Image,
   ModalBody,
   Divider,
-  Card,
-  CardBody,
   ModalFooter,
   Button
 } from "@nextui-org/react"
@@ -52,36 +50,6 @@ const ModalProfile: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                   <EmailIcon className="w-6 h-6" />
                   <h4 className="ml-2">{fetchedUserData.email}</h4>
                 </div>
-              )}
-              {fetchedUserData.organizations.length > 0 && (
-                <>
-                  <Divider />
-                  <div className="my-4">
-                    <h2 className="mb-2">Organizations</h2>
-                    <div className="flex">
-                      <Card
-                        className="border-none dark:bg-default-100/50 w-full"
-                        shadow="sm"
-                        isBlurred
-                      >
-                        <CardBody>
-                          <div className="flex items-center">
-                            <Image
-                              alt={fetchedUserData.organizations[0].login}
-                              src={fetchedUserData.organizations[0].avatar_url}
-                              className="h-16 w-16"
-                            />
-                            <div className="flex flex-col mx-8 ">
-                              <h2>Nombre de verdad</h2>
-                              <h4>{fetchedUserData.organizations[0].login}</h4>
-                              <p>Prettier is an opinionated code formatter</p>
-                            </div>
-                          </div>
-                        </CardBody>
-                      </Card>
-                    </div>
-                  </div>
-                </>
               )}
             </ModalBody>
             <ModalFooter>
