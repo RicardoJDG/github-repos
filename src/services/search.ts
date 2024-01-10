@@ -50,7 +50,6 @@ export const getUser = async (username: string): Promise<FetchedUser | undefined
 
 const fetcher = async (endpointUrl: string) => {
   try {
-    console.log("🚀 ~ fetcher ~ import:", import.meta.env.VITE_GITHUB_TOKEN)
     const response = await fetch(endpointUrl, {
       headers: {
         'authorization': `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`
